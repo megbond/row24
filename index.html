@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#0B0B0D">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Heartled Warriors Row 24</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --depth:#0B0B0D;
+  --current:#FF3DA0;
+  --shallows:#2A1320;
+  --spray:#FFFFFF;
+  --sunrise:#FF3DA0;
+  --ink:#FFFFFF;
+  --ink-soft:#C9B8C2;
+  --line:#2C2C33;
+  --card:#17171B;
+  --bg:#0B0B0D;
+  --done-bg:#2A1320;
+  --focus:#FF3DA0;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Nunito","Avenir Next","Helvetica Neue",Arial,sans-serif;
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px 48px}
+
+/* Hero */
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:radial-gradient(120% 80% at 50% 0%, #2A0F1E 0%, #0B0B0D 70%);
+  border:2px solid var(--current);
+  border-top:0;
+  color:#F3F8F7;
+  border-radius:0 0 28px 28px;
+  padding:0 20px 36px;
+  margin:0 -16px 20px;
+  min-height:300px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+.hero h1{
+  font-family:"Anton","Impact","Arial Narrow",sans-serif;
+  font-size:clamp(40px,10vw,64px);
+  font-weight:400;
+  line-height:0.95;
+  letter-spacing:0.01em;
+  text-transform:uppercase;
+  margin:0 0 10px;
+  max-width:12ch;
+  position:relative;z-index:2;
+  color:#fff;
+  text-shadow:0 2px 0 #B0206B, 0 4px 14px rgba(255,61,160,.45);
+}
+.hero h1 b{color:var(--current);font-weight:400}
+.hero .kicker{
+  position:relative;z-index:2;
+  font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--current);
+  margin:0 0 10px;
+}
+.hero img.team{
+  position:relative;z-index:2;
+  display:block;width:calc(100% + 40px);margin:0 -20px 18px;
+  height:210px;object-fit:cover;object-position:50% 42%;
+  -webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 70%,transparent 100%);
+}
+@media (min-width:600px){ .hero img.team{height:280px} }
+.hero p{margin:0;position:relative;z-index:2;color:#E9DCE3;font-size:16px;max-width:38ch}
+.stats{
+  position:relative;z-index:2;
+  display:flex;gap:28px;flex-wrap:wrap;
+  margin-top:26px;
+}
+.stat b{display:block;font-family:"Anton","Impact",sans-serif;font-size:36px;font-weight:400;line-height:1;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.45)}
+.stat span{font-size:13px;color:#fff;text-transform:uppercase;letter-spacing:.08em;font-weight:700;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+.water{
+  position:absolute;left:0;right:0;bottom:0;
+  height:0%;
+  background:linear-gradient(180deg, #FF3DA0 0%, #C2227A 100%);
+  opacity:.85;
+  transition:height 700ms cubic-bezier(.2,.8,.2,1);
+  z-index:1;
+}
+.water svg{
+  position:absolute;left:0;top:-22px;width:200%;height:24px;
+  animation:drift 9s linear infinite;
+}
+@media (prefers-reduced-motion:reduce){
+  .water svg{animation:none}
+  .water{transition:none}
+}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Lane */
+.lane{
+  display:grid;grid-template-columns:repeat(9,1fr);gap:4px;
+  margin:0 0 22px;
+}
+.lane a{
+  display:block;height:38px;border-radius:8px;
+  background:var(--shallows);
+  position:relative;text-decoration:none;color:var(--ink);
+  font-size:13px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.lane a i{
+  position:absolute;left:0;top:0;bottom:0;width:0;
+  background:var(--current);opacity:.9;
+  transition:width 400ms ease;
+}
+.lane a span{position:relative;z-index:1}
+.lane a.now{outline:2px solid #fff;outline-offset:1px}
+.lane a.full span{color:#fff}
+.lane a span{color:#fff}
+.lane a.event{background:var(--sunrise);color:#fff}
+
+/* Event target */
+.note{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px 16px;
+  margin:0 0 22px;
+  font-size:15px;
+}
+.note strong{font-weight:700}
+
+/* Weeks */
+.week{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  margin:0 0 12px;
+  overflow:hidden;
+}
+.week summary{
+  list-style:none;cursor:pointer;
+  padding:16px 16px 14px;
+  display:flex;align-items:baseline;gap:12px;
+}
+.week summary::-webkit-details-marker{display:none}
+.week summary h2{
+  margin:0;font-family:"Anton","Impact",sans-serif;font-size:24px;font-weight:400;letter-spacing:.02em;line-height:1.1;text-transform:uppercase;
+}
+.week summary .dates{color:var(--ink-soft);font-size:14px}
+.week summary .count{margin-left:auto;font-size:14px;color:var(--ink-soft);white-space:nowrap}
+.week.now summary h2::after{
+  content:"this week";
+  display:inline-block;margin-left:10px;
+  font-size:12px;font-weight:600;vertical-align:middle;
+  background:var(--sunrise);color:#fff;
+  padding:3px 8px;border-radius:999px;
+  font-family:"Nunito",sans-serif;letter-spacing:.06em;text-transform:uppercase;
+}
+.week.complete summary h2{color:var(--current)}
+.week .guide{
+  padding:0 16px 12px;color:var(--ink-soft);font-size:14px;margin:0;
+}
+.sessions{border-top:1px solid var(--line)}
+.sess{
+  display:grid;
+  grid-template-columns:30px 1fr auto;
+  grid-template-areas:"box title held" "box meta held";
+  gap:2px 12px;
+  align-items:center;
+  padding:12px 16px;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+  transition:background 200ms ease;
+}
+.sess:last-child{border-bottom:0}
+.sess.done{background:var(--done-bg)}
+.sess .box{
+  grid-area:box;
+  width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;
+  background:transparent;
+}
+.sess .box svg{width:26px;height:26px;transition:transform 180ms ease}
+.sess .box svg path{fill:transparent;stroke:var(--current);stroke-width:2}
+.sess.done .box svg{transform:scale(1.08)}
+.sess.done .box svg path{fill:var(--current)}
+.sess .title{grid-area:title;font-weight:600;font-size:16px}
+.sess.done .title{text-decoration:line-through;text-decoration-color:var(--current);text-decoration-thickness:2px;color:var(--ink-soft)}
+.sess.done{box-shadow:inset 3px 0 0 var(--current)}
+.sess .meta{grid-area:meta;font-size:14px;color:var(--ink-soft)}
+.sess .meta em{font-style:normal;color:var(--current);font-weight:600;margin-left:8px}
+.sess .held{grid-area:held;align-self:center}
+.sess input{
+  width:64px;padding:7px 8px;
+  border:1px solid var(--line);border-radius:8px;
+  background:#0B0B0D;color:var(--ink);
+  font:inherit;font-size:14px;text-align:center;
+}
+.sess input::placeholder{color:var(--ink-soft);opacity:.7}
+.sess.event{
+  grid-template-columns:30px 1fr;
+  grid-template-areas:"box title" "box meta";
+  background:var(--sunrise);color:#fff;
+}
+.sess.event .meta,.sess.event .title{color:#fff}
+.sess.event .title{font-family:"Anton","Impact",sans-serif;font-weight:400;font-size:19px;letter-spacing:.02em;text-transform:uppercase}
+.sess.event .box svg path{stroke:#fff}
+.sess.event.done .box svg path{fill:#fff}
+.sess.event.done .title{text-decoration-color:#fff}
+
+.sub{
+  padding:10px 16px 0;font-size:14px;color:var(--ink-soft);
+}
+
+.foot{
+  margin-top:28px;font-size:13px;color:var(--ink-soft);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.foot button{
+  font:inherit;font-size:13px;color:var(--ink);
+  background:none;border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;
+}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.sess:focus-visible{outline-offset:-3px}
+#status{font-size:13px;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero" id="hero">
+  <img class="team" src="team.jpg" alt="Heartled Warriors 24hr women's team">
+  <p class="kicker">Heartled Warriors · 24hr Women's Team</p>
+  <h1>Row <b>24</b><br>training tracker</h1>
+  <p>Charity row, 5 to 6 December. Nine weeks, four rows a week. Tap a row to fill the heart and watch the pink rise. Your ticks are yours only. Add this page to your home screen and always open it from there.</p>
+  <div class="stats">
+    <div class="stat"><b id="days">–</b><span>days to go</span></div>
+    <div class="stat"><b id="done">0</b><span>of 35 rows done</span></div>
+    <div class="stat"><b id="streak">0</b><span>in a row</span></div>
+  </div>
+  <div class="water" id="water">
+    <svg viewBox="0 0 1200 24" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="#FF3DA0" d="M0,12 C100,0 200,24 300,12 C400,0 500,24 600,12 C700,0 800,24 900,12 C1000,0 1100,24 1200,12 L1200,24 L0,24 Z"/>
+    </svg>
+  </div>
+</header>
+
+<nav class="lane" id="lane" aria-label="Weeks"></nav>
+
+<div class="note">
+  <strong>Where this ends up.</strong> Event pace is 2:20 to 2:30 per 500m. In the 15-minute stints on the day, that is about 3.1 to 3.2 km each time you sit down. Week 1 starts at 2:40 to 2:55 and every week nudges it closer.
+</div>
+
+<div class="note">
+  <strong>Fitting it around the gym challenge.</strong> Anything marked <em>gym day</em> is short and easy enough to row before or after a gym session. Anything marked <em>own day</em> wants fresh legs: intervals, steady rows and the longer efforts. Each week says which is which.
+</div>
+
+<main id="weeks"></main>
+
+<div class="foot">
+  <span id="status">Your ticks save in this browser on this device.</span>
+  <button id="reset" type="button">Clear all ticks</button>
+</div>
+
+</div>
+
+<script>
+(function(){
+  // Week 1 starts Monday 5 October 2026. Event Saturday 5 to Sunday 6 December.
+  const START = new Date(2026, 9, 5);
+  const EVENT = new Date(2026, 11, 5);
+  const E = "easy", I = "intervals", S = "steady", P = "event pace";
+  // own:true = own day (fresh legs). own:false = can tack onto a gym day.
+  const WEEKS = [
+    { guide:"All four are short this week. Two of them can be warm-ups before the gym, the intervals and one easy row get their own day.", sessions:[
+      {t:"10 min easy", target:"2:40 to 2:55", own:false},
+      {t:"3 x 5 min, 2 min rest", target:"2:35 to 2:50", own:true},
+      {t:"12 min easy", target:"2:40 to 2:55", own:true},
+      {t:"10 min easy", target:"2:40 to 3:00", own:false},
+    ]},
+    { guide:"Two interval sessions now. Keep both on own days with a gym day in between. The 15 min easy can be a finisher.", sessions:[
+      {t:"12 min steady", target:"2:35 to 2:50", own:false},
+      {t:"3 x 6 min, 2 min rest", target:"2:30 to 2:45", own:true},
+      {t:"15 min easy", target:"2:40 to 2:50", own:false},
+      {t:"4 x 4 min, 2 min rest", target:"2:30 to 2:40", own:true},
+    ]},
+    { guide:"The 2 x 10 is the first proper long effort. Give it a day with nothing heavy before it. The 18 min easy sits well after a lighter gym session.", sessions:[
+      {t:"15 min steady", target:"2:30 to 2:45", own:true},
+      {t:"4 x 5 min, 2 min rest", target:"2:25 to 2:40", own:true},
+      {t:"18 min easy", target:"2:35 to 2:50", own:false},
+      {t:"2 x 10 min, 3 min rest", target:"2:30 to 2:40", own:true},
+    ]},
+    { guide:"Rest drops to 90 seconds in session 4. Three own days this week, one tack-on. If the gym challenge has a heavy leg day, keep the intervals away from it.", sessions:[
+      {t:"15 min steady", target:"2:30 to 2:40", own:true},
+      {t:"3 x 8 min, 2 min rest", target:"2:25 to 2:35", own:true},
+      {t:"20 min easy", target:"2:35 to 2:45", own:false},
+      {t:"4 x 5 min, 90 sec rest", target:"2:25 to 2:35", own:true},
+    ]},
+    { guide:"Halfway. The 2 x 15 is the longest total time so far and wants its own day. The 15 min easy is the only tack-on.", sessions:[
+      {t:"20 min steady", target:"2:30 to 2:40", own:true},
+      {t:"4 x 6 min, 2 min rest", target:"2:25 to 2:35", own:true},
+      {t:"2 x 15 min, 4 min rest", target:"2:25 to 2:35", own:true},
+      {t:"15 min easy", target:"2:35 to 2:45", own:false},
+    ]},
+    { guide:"First event-pace row. Treat it like a dress rehearsal: same erg settings, same drink, same music. Everything else on its own day except the 20 min easy.", sessions:[
+      {t:"20 min steady", target:"2:25 to 2:35", own:true},
+      {t:"3 x 10 min, 3 min rest", target:"2:20 to 2:30", own:true},
+      {t:"15 min event-pace row", target:"2:25 to 2:30", own:true},
+      {t:"20 min easy", target:"2:35 to 2:45", own:false},
+    ]},
+    { guide:"Biggest week. All four on own days if you can manage it. If one has to share a gym day, make it the 25 min steady and keep it honest.", sessions:[
+      {t:"2 x 15 min, 5 min rest", target:"2:25 to 2:30", own:true},
+      {t:"5 x 5 min, 2 min rest", target:"2:20 to 2:25", own:true},
+      {t:"25 min steady", target:"2:30 to 2:40", own:true},
+      {t:"15 min event pace", target:"2:20 to 2:30", own:true},
+    ]},
+    { guide:"Gym challenge wraps this week. The simulation is three stints with 30 min off between them, so block out about two hours. Do it on a day with nothing after it.", sessions:[
+      {t:"15 min event pace", target:"2:20 to 2:30", own:true},
+      {t:"3 x 15 min, 5 min rest", target:"2:25 to 2:30", own:true},
+      {t:"25 min easy", target:"2:35 to 2:45", own:false},
+      {t:"Event simulation: 3 x 15 min, 30 min off between", target:"2:25 to 2:30", own:true},
+    ]},
+    { guide:"Event week. Nothing here should feel hard. The job is to arrive fresh.", sessions:[
+      {t:"15 min easy", target:"2:35 to 2:45", own:false},
+      {t:"12 min easy, then 3 x 1 min at event pace", target:"easy 2:35 to 2:45, efforts 2:20 to 2:25", own:true},
+      {t:"10 min very easy, just move", target:"2:45 or slower", own:false},
+    ], event:{t:"24-hour row, Saturday 5 to Sunday 6 December", target:"2:20 to 2:30, about 3.1 to 3.2 km per 15 min stint"} },
+  ];
+
+  const TOTAL = 35;
+  let state = { done:{}, held:{} };
+  let dbDoc = null, saveChain = Promise.resolve();
+  const LS_KEY = "row24-progress";
+
+  function fmt(d){ return d.toLocaleDateString("en-AU",{day:"numeric",month:"short"}); }
+  function addDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
+  function weekIndexNow(){
+    const now = new Date(); now.setHours(0,0,0,0);
+    const diff = Math.floor((now - START)/86400000);
+    if (diff < 0) return -1;
+    return Math.min(8, Math.floor(diff/7));
+  }
+
+  function build(){
+    const weeksEl = document.getElementById("weeks");
+    const laneEl = document.getElementById("lane");
+    const nowIdx = weekIndexNow();
+    WEEKS.forEach((w,wi)=>{
+      const start = addDays(START, wi*7), end = addDays(start,6);
+      const det = document.createElement("details");
+      det.className = "week"; det.id = "week"+(wi+1);
+      if (wi === nowIdx || (nowIdx===-1 && wi===0)) { det.open = true; det.classList.add("now"); }
+      const n = wi+1;
+      det.innerHTML = `
+        <summary>
+          <h2>Week ${n}</h2>
+          <span class="dates">${fmt(start)} to ${fmt(end)}</span>
+          <span class="count" data-count></span>
+        </summary>
+        <p class="guide">${w.guide}</p>
+        <div class="sessions"></div>`;
+      const list = det.querySelector(".sessions");
+      w.sessions.forEach((s,si)=>{
+        const key = "w"+n+"s"+(si+1);
+        const row = document.createElement("div");
+        row.className = "sess"; row.tabIndex = 0; row.dataset.key = key; row.setAttribute("role","checkbox");
+        row.innerHTML = `
+          <span class="box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.4-9.1C1.3 8.4 3.3 5 6.7 5c2 0 3.5 1.1 4.3 2.4h2C13.8 6.1 15.3 5 17.3 5c3.4 0 5.4 3.4 4.1 6.4-1.9 4.5-9.4 9.1-9.4 9.1z"/></svg></span>
+          <span class="title">${si+1}. ${s.t}</span>
+          <span class="meta">${s.target} <em>${s.own ? "own day" : "gym day"}</em></span>
+          <span class="held"><input type="text" inputmode="numeric" placeholder="held" aria-label="Split you held" data-held="${key}"></span>`;
+        list.appendChild(row);
+      });
+      if (w.event){
+        const row = document.createElement("div");
+        row.className = "sess event"; row.tabIndex = 0; row.dataset.key = "event"; row.setAttribute("role","checkbox");
+        row.innerHTML = `
+          <span class="box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.4-9.1C1.3 8.4 3.3 5 6.7 5c2 0 3.5 1.1 4.3 2.4h2C13.8 6.1 15.3 5 17.3 5c3.4 0 5.4 3.4 4.1 6.4-1.9 4.5-9.4 9.1-9.4 9.1z"/></svg></span>
+          <span class="title">${w.event.t}</span>
+          <span class="meta">${w.event.target}</span>`;
+        list.appendChild(row);
+      }
+      weeksEl.appendChild(det);
+
+      const a = document.createElement("a");
+      a.href = "#week"+n; a.innerHTML = `<i></i><span>${n}</span>`;
+      if (wi===nowIdx) a.classList.add("now");
+      if (wi===8) a.classList.add("event");
+      a.addEventListener("click", ()=>{ det.open = true; });
+      laneEl.appendChild(a);
+    });
+
+    weeksEl.addEventListener("click", e=>{
+      if (e.target.closest("input")) return;
+      const row = e.target.closest(".sess"); if(!row) return;
+      toggle(row.dataset.key);
+    });
+    weeksEl.addEventListener("keydown", e=>{
+      if (e.target.closest("input")) return;
+      const row = e.target.closest(".sess"); if(!row) return;
+      if (e.key===" "||e.key==="Enter"){ e.preventDefault(); toggle(row.dataset.key); }
+    });
+    weeksEl.addEventListener("change", e=>{
+      const inp = e.target.closest("input[data-held]"); if(!inp) return;
+      const v = inp.value.trim();
+      if (v) state.held[inp.dataset.held] = v; else delete state.held[inp.dataset.held];
+      save();
+    });
+    document.getElementById("reset").addEventListener("click", ()=>{
+      if (!confirm("Clear every tick and split on this tracker?")) return;
+      state = {done:{},held:{}}; save(); render();
+    });
+  }
+
+  function toggle(key){
+    if (state.done[key]) delete state.done[key]; else state.done[key] = true;
+    save(); render();
+  }
+
+  function render(){
+    const rows = document.querySelectorAll(".sess");
+    rows.forEach(r=>{
+      r.classList.toggle("done", !!state.done[r.dataset.key]);
+      r.setAttribute("aria-checked", !!state.done[r.dataset.key]);
+    });
+    document.querySelectorAll("input[data-held]").forEach(inp=>{
+      const v = state.held[inp.dataset.held] || "";
+      if (inp.value !== v && document.activeElement !== inp) inp.value = v;
+    });
+    let total = 0;
+    document.querySelectorAll(".week").forEach((det,wi)=>{
+      const n = wi+1, count = WEEKS[wi].sessions.length;
+      let d = 0;
+      for (let si=1; si<=count; si++) if (state.done["w"+n+"s"+si]) d++;
+      total += d;
+      det.querySelector("[data-count]").textContent = d===count ? "done" : d+" of "+count;
+      det.classList.toggle("complete", d===count);
+      const laneA = document.querySelectorAll(".lane a")[wi];
+      laneA.querySelector("i").style.width = (d/count*100)+"%";
+      laneA.classList.toggle("full", d===count);
+    });
+    document.getElementById("done").textContent = total;
+    document.getElementById("water").style.height = (total/TOTAL*100)+"%";
+
+    // streak: consecutive ticked sessions from week 1 session 1
+    let streak = 0; outer: for (let wi=0; wi<WEEKS.length; wi++){
+      for (let si=1; si<=WEEKS[wi].sessions.length; si++){
+        if (state.done["w"+(wi+1)+"s"+si]) streak++; else break outer;
+      }
+    }
+    document.getElementById("streak").textContent = streak;
+
+    const today = new Date(); today.setHours(0,0,0,0);
+    const days = Math.max(0, Math.round((EVENT - today)/86400000));
+    document.getElementById("days").textContent = days;
+  }
+
+  let dirty = false;
+  function status(msg){ document.getElementById("status").textContent = msg; }
+  function save(){
+    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch(e){}
+    if (!dbDoc){ dirty = true; return; }
+    const snapshot = JSON.parse(JSON.stringify(state));
+    saveChain = saveChain.then(()=>dbDoc.set(snapshot)).then(()=>{
+      dirty = false;
+      status("Saved to your account. Only you can see your ticks.");
+    }).catch(e=>{
+      dirty = true;
+      status("Could not save to your account (" + ((e && (e.code||e.message)) || "unknown") + "). Kept on this device.");
+    });
+  }
+
+  function load(){
+    try { const raw = localStorage.getItem(LS_KEY); if (raw){ const s = JSON.parse(raw); if (s && s.done) state = {done:s.done||{}, held:s.held||{}}; } } catch(e){}
+  }
+
+  function connect(){
+    try { localStorage.setItem("row24-test","1"); localStorage.removeItem("row24-test"); status("Your ticks save in this browser on this device. Open this page the same way each time."); }
+    catch(e){ status("This browser is blocking storage, so ticks will not keep. Try opening the page in Safari or Chrome."); }
+  }
+
+  load(); build(); render(); connect();
+})();
+</script>
+</body>
+</html>
